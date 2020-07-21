@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Calculadora de prazos
 
-## Available Scripts
+* props
+    - token(String)
+    - codIbge(String)
+    - tempo(Number)
+    - diasParaIgnorar(Array)
+    - typeCodes(Array)
+    - datasParaIgnorar(Array)
+    - removerFeriados(Array)
+    - showLegend(String)
+    - onChangePrazo(func)
+    - prazoOriginal(func)
 
-In the project directory, you can run:
+* codIbge e tempo são props obrigatórias.
 
-### `npm start`
+* token - token da api de feriados
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* codIbge - para pegar os feriados da cidade.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+* tempo - para gerar o prazo de manutenção, converte minutos em dias.
+    - EX: tempo={1440} converte 1440 minutos em 1 dia
 
-### `npm test`
+* diasParaIgnorar - ignora qualquer quantidade de dias da semana(dom,seg,ter..)
+    - Ex: diasParaIgnorar={[new Date()]}
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* typeCodes - para validar os feriados.
+    - Ex: typeCodes={[1,2,3]}
 
-### `npm run build`
+* datasParaIgnorar - ignora qualquer quantidade de datas
+    - Ex: datasParaIgnorar={[new Date()]}
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* removerFeriados - remove os feriados do range de feriados
+    - Ex: removerFeriados={[new Date( data_do_feriado )]}
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* showLegend - mostra o painel expansivo
+    - Ex: showLegend={'true'}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* onChangePrazo - retorna o prazo recalculado
+    - cria uma Fn: 
+    - async pegarPrazoOriginal( prazo ){
+        let praRecalculado = await prazo;
+    }
+    - EX: onChangePrazo={ this.pegarPrazoRecalculado.bind(this) }
 
-### `npm run eject`
+* prazoOriginal - retorna o prazo original 
+    - mesmo do onChangePrazo 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1 - npm i exemplo2
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+2 - <Calendar codIbge={'3301900'} tempo={1440} token={'SUA_API_KEY'} />
